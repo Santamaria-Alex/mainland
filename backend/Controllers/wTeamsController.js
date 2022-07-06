@@ -78,7 +78,17 @@ const updateWedTeams = asyncHandler(async (req, res) => {
 //@route    DELETE /api/goals/:id
 //@access   Private
 const deleteWedTeams = asyncHandler(async (req, res) => {
-  res.status(200).json({ message: `Delete Wednesday Team ${req.params.id}` });
+  const wTeam = await WTeams.findById(req.params.id);
+
+  if (wTeam) {
+    await wTeam.remove();
+    res.json({ id: req.params.id });
+  } else {
+    res.status(404);
+    throw new Error("Team Not Found");
+  }
+
+  // res.status(200).json({ id: req.params.id });
 });
 
 module.exports = {
