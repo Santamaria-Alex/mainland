@@ -7,42 +7,42 @@ const wTeamsSchema = mongoose.Schema({
   },
   gamesPlayed: {
     type: Number,
-    required: true,
+    required: false,
     default: 0,
   },
   wins: {
     type: Number,
-    required: true,
+    required: false,
     default: 0,
   },
   losses: {
     type: Number,
-    required: true,
+    required: false,
     default: 0,
   },
   ties: {
     type: Number,
-    required: true,
+    required: false,
     default: 0,
   },
   goalsFor: {
     type: Number,
-    required: true,
+    required: false,
     default: 0,
   },
   goalsAgainst: {
     type: Number,
-    required: true,
+    required: false,
     default: 0,
   },
   goalDif: {
     type: Number,
-    required: true,
+    required: false,
     default: 0,
   },
   points: {
     type: Number,
-    required: true,
+    required: false,
     default: 0,
   },
 });

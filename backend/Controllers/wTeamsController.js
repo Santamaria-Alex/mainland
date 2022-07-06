@@ -41,7 +41,37 @@ const setWedTeams = asyncHandler(async (req, res) => {
 //@route    PUT /api/goals/:id
 //@access   Private
 const updateWedTeams = asyncHandler(async (req, res) => {
-  res.status(200).json({ message: `Update Wednesday Teams ${req.params.id}` });
+  const {
+    teamName,
+    gamesPlayed,
+    wins,
+    losses,
+    ties,
+    goalsFor,
+    goalsAgainst,
+    goalDif,
+    points,
+  } = req.body;
+
+  const wTeam = await WTeams.findById(req.params.id);
+
+  if (wTeam) {
+    (wTeam.teamName = teamName),
+      (wTeam.gamesPlayed = gamesPlayed),
+      (wTeam.wins = wins),
+      (wTeam.losses = losses),
+      (wTeam.ties = ties),
+      (wTeam.goalsFor = goalsFor),
+      (wTeam.goalsAgainst = goalsAgainst),
+      (wTeam.goalDif = goalDif),
+      (wTeam.points = points);
+
+    const updatedTeam = await wTeam.save();
+    res.status(200).json(updatedTeam);
+  } else {
+    res.status(400);
+    throw new Error("Team not found");
+  }
 });
 
 //@desc     Delete wednesday schedule
