@@ -1,26 +1,40 @@
 const asyncHandler = require("express-async-handler");
 
-const wTeams = require("../models/wTeamsModel");
+const WTeams = require("../models/wTeamsModel");
 
 //@desc Get all wednesday teams
 //@route GET /api/mainland
 //@access Private
 const getWedTeams = asyncHandler(async (req, res) => {
-  const wedTeams = await wTeams.find();
+  const wedTeams = await WTeams.find();
 
   res.status(200).json(wedTeams);
 });
 
-//@desc     Set wednesday schedule
-//@route    POST /api/goals
+//@desc     Set wednesday teams
+//@route    POST /api/mainland
 //@access   Private
 const setWedTeams = asyncHandler(async (req, res) => {
-  if (!req.body.text) {
-    res.status(400);
-    throw new Error("Please add text field.");
-  }
+  // if (!req.body.text) {
+  //   res.status(400);
+  //   throw new Error("Please add text field.");
+  // }
 
-  res.status(200).json({ message: "Set Wednesday Teams" });
+  const wTeam = new WTeams({
+    teamName: "Sample name",
+    gamesPlayed: 0,
+    wins: 0,
+    losses: 0,
+    ties: 0,
+    goalsFor: 0,
+    goalsAgainst: 0,
+    goalDif: 0,
+    points: 0,
+  });
+
+  const createdTeam = await wTeam.save();
+
+  res.status(201).json(createdTeam);
 });
 
 //@desc     Update wednesday schedule

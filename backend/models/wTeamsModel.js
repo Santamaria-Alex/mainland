@@ -47,4 +47,4 @@ const wTeamsSchema = mongoose.Schema({
   },
 });
 
-module.exports = mongoose.model("wTeams", wTeamsSchema);
+module.exports = mongoose.model("WTeams", wTeamsSchema);
